@@ -8,7 +8,7 @@ function addTodoItem (todo) {
   let html = `
   <div class="todo transition delay-1000 bg-gray-200 p-4 shadow-xl rounded-lg my-4 flex justify-between items-center flex-col">
           <div class="non-edit w-full flex justify-between items-center">
-            <div class="todo-val w-full">
+            <div class="todo-val w-full break-all">
               ${todo}
             </div>
             <div class="options w-24 text-red-600 flex justify-around items-center">
@@ -33,7 +33,7 @@ function addTodoItem (todo) {
           </form>
         </div>
   `;
-  
+
   todoContainer.insertAdjacentHTML('beforeend', html)
   setLocalStorage();
   handleCompleteTodo();
@@ -59,9 +59,7 @@ function handleEditValue (event) {
   event.preventDefault();
   let editedVal = event.currentTarget.previousElementSibling;
   let todo = event.currentTarget.parentNode.previousElementSibling.childNodes[1];
-  console.log(todo);
   todo.textContent = editedVal.value;
-  console.log(editedVal);
   editedVal.parentNode.classList.add('hidden')
   setLocalStorage();
 }
@@ -89,7 +87,7 @@ function toggleComplete (event) {
   event.preventDefault();
   let todo = event.currentTarget.parentNode.previousElementSibling;
   todo.classList.toggle('line-through')
-  todo.classList.toggle('opacity-75')
+  todo.classList.toggle('opacity-50')
   if (todo.classList.contains('line-through')) {
     event.currentTarget.classList.add('opacity-50')
   } else {
