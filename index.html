@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/js/all.min.js"></script>
+    <link rel="stylesheet" href="style.css" />
+    <script defer src="script.js"></script>
+  </head>
+  <body class="bg-blue-600">
+    <header
+      class="bg-yellow-600 py-8 px-4 h-auto flex justify-center items-center"
+    >
+      <div
+        class="container flex justify-center items-center flex-col max-w-2xl"
+      >
+        <h1 class="text-4xl text-white font-bold">Fab To-do List</h1>
+        <form
+          action=""
+          name="add_todo"
+          class="flex justify-center items-center flex-col w-full sm:flex-row"
+        >
+          <input
+            class="py-3 px-6 m-4 w-full rounded-full text-xl placeholder-gray-700 outline-none"
+            type="text"
+            name="add_input"
+            placeholder="Enter a To-do"
+          />
+          <button
+            class="bg-blue-500 hover:bg-blue-700 ml-2 text-xl text-white font-bold py-3 px-10 rounded-full focus:outline-none"
+            type="submit"
+            name="add_btn"
+          >
+            Add
+          </button>
+        </form>
+      </div>
+    </header>
+    <main class="flex justify-center items-center p-2 mt-4">
+      <div class="todo-container transition delay-1000 w-full max-w-2xl">
+        <div
+          class="todo transition delay-1000 bg-gray-200 p-4 shadow-xl rounded-lg my-4 flex justify-between items-center flex-col"
+        >
+          <div class="non-edit w-full flex justify-between items-center">
+            <div class="todo-val w-full">
+              Go to Hogwarts
+            </div>
+            <div
+              class="options w-24 text-red-600 flex justify-around items-center"
+            >
+              <div class="complete-tick cursor-pointer">
+                <i class="fas fa-check text-green-700"></i>
+              </div>
+              <div class="edit-btn cursor-pointer">
+                <i class="fas fa-edit text-black"></i>
+              </div>
+              <div class="trash-div cursor-pointer">
+                <i class="fas fa-trash"></i>
+              </div>
+            </div>
+          </div>
+          <form
+            class="edit w-full mt-4 flex justify-between items-center hidden"
+          >
+            <input
+              class="edit-input w-3/4 p-2 border-2 border-solid border-black rounded"
+              type="text"
+            />
+            <button
+              class="bg-yellow-600 hover:bg-blue-700 ml-2 text-xl text-white font-bold py-2 px-6 rounded-full focus:outline-none"
+              type="submit"
+            >
+              Save
+            </button>
+          </form>
+        </div>
+        <div
+          class="todo transition delay-1000 bg-gray-200 p-4 shadow-xl rounded-lg my-4 flex justify-between items-center flex-col"
+        >
+          <div class="non-edit w-full flex justify-between items-center">
+            <div class="todo-val w-full cursor-pointer">
+              Go to Hogwarts
+            </div>
+            <div
+              class="options w-24 text-red-600 flex justify-around items-center"
+            >
+              <div class="complete-tick cursor-pointer">
+                <i class="fas fa-check text-green-700"></i>
+              </div>
+              <div class="edit-btn cursor-pointer">
+                <i class="fas fa-edit text-black"></i>
+              </div>
+              <div class="trash-div cursor-pointer">
+                <i class="fas fa-trash"></i>
+              </div>
+            </div>
+          </div>
+          <form
+            class="edit w-full mt-4 flex justify-between items-center hidden"
+          >
+            <input
+              class="edit-input w-3/4 p-2 border-2 border-solid border-black rounded"
+              type="text"
+            />
+            <button
+              class="bg-yellow-600 hover:bg-blue-700 text-xl text-white font-bold py-2 px-6 rounded-full focus:outline-none"
+              type="submit"
+            >
+              Save
+            </button>
+          </form>
+        </div>
+        <div
+          class="todo transition delay-1000 bg-gray-200 p-4 shadow-xl rounded-lg my-4 flex justify-between items-center flex-col"
+        >
+          <div class="non-edit w-full flex justify-between items-center">
+            <div class="todo-val w-full cursor-pointer">
+              Pick up the potions from Professor Snape
+            </div>
+            <div
+              class="options w-24 text-red-600 flex justify-around items-center"
+            >
+              <div class="complete-tick cursor-pointer">
+                <i class="fas fa-check text-green-700"></i>
+              </div>
+              <div class="edit-btn cursor-pointer">
+                <i class="fas fa-edit text-black"></i>
+              </div>
+              <div class="trash-div cursor-pointer">
+                <i class="fas fa-trash"></i>
+              </div>
+            </div>
+          </div>
+          <form
+            class="edit w-full mt-4 flex justify-between items-center hidden"
+          >
+            <input
+              class="edit-input w-3/4 p-2 border-2 border-solid border-black rounded"
+              type="text"
+            />
+            <button
+              class="bg-yellow-600 hover:bg-blue-700 ml-2 ml-2 text-xl text-white font-bold py-2 px-6 rounded-full focus:outline-none"
+              type="submit"
+            >
+              Save
+            </button>
+          </form>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
