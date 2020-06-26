@@ -27,13 +27,12 @@ function createTodo (items = [], itemList) {
                 </div>
               </div>
             </div>
-            <form class="edit-form w-full mt-4 flex justify-between items-center ${todo.isEditing ? "" : 'hidden'}" name="edit-form">
+            <form action="" class="edit-form w-full mt-4 flex justify-between items-center ${todo.isEditing ? "" : 'hidden'}" name="edit-form">
               <input
                 class="edit-input w-3/4 p-2 border-2 border-solid border-black rounded" name="edit_input"
                 type="text" value="${todo.task}"/>
-              <button
-                class="bg-yellow-600 hover:bg-blue-700 text-xl ml-2 text-white font-bold py-2 px-6 rounded-full focus:outline-none" name="edit_btn"
-                type="submit">Save</button>
+              <button type="submit"
+                class="bg-yellow-600 hover:bg-blue-700 text-xl ml-2 text-white font-bold py-2 px-6 rounded-full focus:outline-none" name="edit_btn">Save</button>
             </form>
           </div>
     `)
@@ -83,15 +82,24 @@ function deleteTodo (e) {
 
 function saveEditedTodo () {
   const editForms = document.querySelectorAll('.edit-form');
-  editForms.forEach(form => {
-    form.edit_btn.addEventListener('click', (e) => {
-      let index = e.target.closest('.todo').dataset.index;
-      todos[index].task = e.target.previousElementSibling.value;
-      todos[index].isEditing = false;
-      createTodo(todos, list);
-      localStorage.setItem('todos', JSON.stringify(todos))
-    })
-  })
+  // When I add click event listener to edit_input button the form works
+  // editForms.forEach(form => {
+  //   form.edit_btn.addEventListener('click', (e) => {
+  //     let index = e.target.closest('.todo').dataset.index;
+  //     todos[index].task = e.target.previousElementSibling.value;
+  //     todos[index].isEditing = false;
+  //     createTodo(todos, list);
+  //     localStorage.setItem('todos', JSON.stringify(todos))
+  //   })
+  // })
+  
+  // but if I add submit event to form it doesnt fire idky I binded my form (in html template string above) 
+  editForms.forEach(form => form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    
+    console.log('works')
+  }))
+
 }
 
 function editTodo (e) {
