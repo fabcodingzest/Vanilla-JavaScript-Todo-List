@@ -10,7 +10,7 @@
     />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/js/all.min.js"></script>
     <link rel="stylesheet" href="style.css" />
-    <script defer src="script.js"></script>
+    <script async src="script.js"></script>
   </head>
   <body class="bg-blue-600">
     <header
@@ -43,118 +43,8 @@
       </div>
     </header>
     <main class="flex justify-center items-center p-2 mt-4">
-      <div class="todo-container transition delay-1000 w-full max-w-2xl">
-        <div
-          class="todo transition delay-1000 bg-gray-200 p-4 shadow-xl rounded-lg my-4 flex justify-between items-center flex-col"
-        >
-          <div class="non-edit w-full flex justify-between items-center">
-            <div class="todo-val w-full break-all">
-              Go to Hogwarts
-            </div>
-            <div
-              class="options w-24 text-red-600 flex justify-around items-center"
-            >
-              <div class="complete-tick cursor-pointer">
-                <i class="fas fa-check text-green-700"></i>
-              </div>
-              <div class="edit-btn cursor-pointer">
-                <i class="fas fa-edit text-black"></i>
-              </div>
-              <div class="trash-div cursor-pointer">
-                <i class="fas fa-trash"></i>
-              </div>
-            </div>
-          </div>
-          <form
-            class="edit w-full mt-4 flex justify-between items-center hidden"
-          >
-            <input
-              class="edit-input w-3/4 p-2 border-2 border-solid border-black rounded"
-              maxlength="60"
-              type="text"
-            />
-            <button
-              class="bg-yellow-600 hover:bg-blue-700 ml-2 text-xl text-white font-bold py-2 px-6 rounded-full focus:outline-none"
-              type="submit"
-            >
-              Save
-            </button>
-          </form>
-        </div>
-        <div
-          class="todo transition delay-1000 bg-gray-200 p-4 shadow-xl rounded-lg my-4 flex justify-between items-center flex-col"
-        >
-          <div class="non-edit w-full flex justify-between items-center">
-            <div class="todo-val w-full break-all cursor-pointer">
-              Go to Hogwarts
-            </div>
-            <div
-              class="options w-24 text-red-600 flex justify-around items-center"
-            >
-              <div class="complete-tick cursor-pointer">
-                <i class="fas fa-check text-green-700"></i>
-              </div>
-              <div class="edit-btn cursor-pointer">
-                <i class="fas fa-edit text-black"></i>
-              </div>
-              <div class="trash-div cursor-pointer">
-                <i class="fas fa-trash"></i>
-              </div>
-            </div>
-          </div>
-          <form
-            class="edit w-full mt-4 flex justify-between items-center hidden"
-          >
-            <input
-              class="edit-input w-3/4 p-2 border-2 border-solid border-black rounded"
-              maxlength="60"
-              type="text"
-            />
-            <button
-              class="bg-yellow-600 hover:bg-blue-700 text-xl text-white font-bold py-2 px-6 rounded-full focus:outline-none"
-              type="submit"
-            >
-              Save
-            </button>
-          </form>
-        </div>
-        <div
-          class="todo transition delay-1000 bg-gray-200 p-4 shadow-xl rounded-lg my-4 flex justify-between items-center flex-col"
-        >
-          <div class="non-edit w-full flex justify-between items-center">
-            <div class="todo-val w-full break-all cursor-pointer">
-              Pick up the potions from Professor Snape
-            </div>
-            <div
-              class="options w-24 text-red-600 flex justify-around items-center"
-            >
-              <div class="complete-tick cursor-pointer">
-                <i class="fas fa-check text-green-700"></i>
-              </div>
-              <div class="edit-btn cursor-pointer">
-                <i class="fas fa-edit text-black"></i>
-              </div>
-              <div class="trash-div cursor-pointer">
-                <i class="fas fa-trash"></i>
-              </div>
-            </div>
-          </div>
-          <form
-            class="edit w-full mt-4 flex justify-between items-center hidden"
-          >
-            <input
-              class="edit-input w-3/4 p-2 border-2 border-solid border-black rounded"
-              maxlength="60"
-              type="text"
-            />
-            <button
-              class="bg-yellow-600 hover:bg-blue-700 ml-2 ml-2 text-xl text-white font-bold py-2 px-6 rounded-full focus:outline-none"
-              type="submit"
-            >
-              Save
-            </button>
-          </form>
-        </div>
+      <div class="todo-container w-full max-w-2xl">
+        <!-- Todos to be inserted with JavaScript -->
       </div>
     </main>
   </body>

@@ -1,131 +1,112 @@
-const addTodoInput = document.querySelector('input');
-const addTodoButton = document.querySelector('button');
-const todoContainer = document.querySelector('.todo-container');
+const formAddTodo = document.add_todo;
 const deleteBtns = document.querySelectorAll('.trash-div');
-const todoVal = document.querySelectorAll('.todo-val')
+const list = document.querySelector('.todo-container');
 
-function addTodoItem (todo) {
-  let html = `
-  <div class="todo transition delay-1000 bg-gray-200 p-4 shadow-xl rounded-lg my-4 flex justify-between items-center flex-col">
-          <div class="non-edit w-full flex justify-between items-center">
-            <div class="todo-val w-full break-all">
-              ${todo}
-            </div>
-            <div class="options w-24 text-red-600 flex justify-around items-center">
-            <div class="complete-tick cursor-pointer">
-              <i class="fas fa-check text-green-700"></i>
-            </div>
-              <div class="edit-btn cursor-pointer">
-                <i class="fas fa-edit text-black"></i>
+
+let todos = JSON.parse(localStorage.getItem('todos')) || [
+  {task: "Go to Hogwarts", completed: false, isEditing: false},
+  {task: "Pick up potions from Professor Snape", completed: false, isEditing: false},
+  {task: "Meeting with Hermione and Ron", completed: false, isEditing: false},
+];
+
+function createTodo (items = [], itemList) {
+  itemList.innerHTML = items.map((todo,i) => {
+    return (`
+    <div class="todo bg-gray-200 p-4 shadow-xl rounded-lg my-4 flex justify-between items-center flex-col" id="${i}" data-index="${i}">
+            <div class="non-edit w-full flex justify-between items-center">
+              <div class="todo-val w-full break-all ${todo.completed ? "line-through" : ""} ${todo.completed ? "opacity-50" : ""}">${todo.task}</div>
+              <div class="options w-24 text-red-600 flex justify-around items-center">
+              <div class="complete-tick cursor-pointer">
+                <i class="fas fa-check text-green-700 ${todo.completed ? "opacity-50" : ""}"></i>
               </div>
-              <div class="trash-div cursor-pointer">
-                <i class="fas fa-trash"></i>
+                <div class="edit-btn cursor-pointer">
+                  <i class="fas fa-edit text-black"></i>
+                </div>
+                <div class="trash-div cursor-pointer">
+                  <i class="fas fa-trash"></i>
+                </div>
               </div>
             </div>
+            <form class="edit-form w-full mt-4 flex justify-between items-center ${todo.isEditing ? "" : 'hidden'}" name="edit-form">
+              <input
+                class="edit-input w-3/4 p-2 border-2 border-solid border-black rounded" name="edit_input"
+                type="text" value="${todo.task}"/>
+              <button
+                class="bg-yellow-600 hover:bg-blue-700 text-xl ml-2 text-white font-bold py-2 px-6 rounded-full focus:outline-none" name="edit_btn"
+                type="submit">Save</button>
+            </form>
           </div>
-          <form class="edit w-full mt-4 flex justify-between items-center hidden">
-            <input
-              class="edit-input w-3/4 p-2 border-2 border-solid border-black rounded"
-              type="text"/>
-            <button
-              class="bg-yellow-600 hover:bg-blue-700 text-xl ml-2 text-white font-bold py-2 px-6 rounded-full focus:outline-none"
-              type="submit">Save</button>
-          </form>
-        </div>
-  `;
-
-  todoContainer.insertAdjacentHTML('beforeend', html)
-  setLocalStorage();
-  handleCompleteTodo();
-  handleEditTodo();
-  handleDelete();
+    `)
+  }).join("");
 }
 
-function setLocalStorage () {
-  const todoHtml = document.querySelector('.todo-container').innerHTML;
-  window.localStorage.setItem('todo-container', JSON.stringify(todoHtml));
+function addTodoItem (task) {
+  let todo = {
+    task,
+    completed: false,
+    isEditing: false
+  };
+  
+  todos.unshift(todo);
+  createTodo(todos, list);
+  localStorage.setItem('todos', JSON.stringify(todos));  
 }
-
-function loadLocalStorage () {
-  let todos = JSON.parse(window.localStorage.getItem('todo-container'));
-  if (todos !== null) {
-    todoContainer.innerHTML = todos;
-  }
-}
-
-loadLocalStorage();
-
-function handleEditValue (event) {
-  event.preventDefault();
-  let editedVal = event.currentTarget.previousElementSibling;
-  let todo = event.currentTarget.parentNode.previousElementSibling.childNodes[1];
-  todo.textContent = editedVal.value;
-  editedVal.parentNode.classList.add('hidden')
-  setLocalStorage();
-}
-
-function editTodo (event) {
-  event.preventDefault();
-  const editForm = event.currentTarget.parentNode.parentNode.nextElementSibling;
-  const prevTodo = event.currentTarget.parentNode.parentNode.childNodes[1].textContent.trim();  
-  editForm.classList.toggle('hidden')
-  const editInput = editForm.querySelector('.edit-input');
-  editInput.focus()
-  editInput.value = prevTodo;
-  const editSave = editInput.nextElementSibling;  
-  editSave.addEventListener('click', handleEditValue)
-  setLocalStorage();
-}
-
-function handleEditTodo () {
-  const editBtns = document.querySelectorAll('.edit-btn');
-  editBtns.forEach(editBtn => editBtn.addEventListener('click', editTodo));
-}
-handleEditTodo();
-
-function toggleComplete (event) {
-  event.preventDefault();
-  let todo = event.currentTarget.parentNode.previousElementSibling;
-  todo.classList.toggle('line-through')
-  todo.classList.toggle('opacity-50')
-  if (todo.classList.contains('line-through')) {
-    event.currentTarget.classList.add('opacity-50')
-  } else {
-    event.currentTarget.classList.remove('opacity-50')
-  }
-  setLocalStorage();
- }
-
-function handleCompleteTodo () {
-  let todoVal = document.querySelectorAll('.todo-val');
-  let completeBtn = document.querySelectorAll('.complete-tick');
-  // todoVal.forEach(todo => todo.addEventListener('click', toggleComplete));
-  completeBtn.forEach(todo => todo.addEventListener('click', toggleComplete));
-}
-
-handleCompleteTodo();
-
-function deleteTodo (event) {
-  event.preventDefault();  
-  let todo = event.target.closest('.todo');
-  todo.remove();
-  setLocalStorage();
-}
-
-function handleDelete () {
-  let todos = document.querySelectorAll('.trash-div');
-  todos.forEach(dltBtn => dltBtn.addEventListener('click', deleteTodo))
-}
-
-handleDelete();
 
 function handleAddTodo (event) {
   event.preventDefault();
-  inputVal = addTodoInput.value;
+  inputVal = formAddTodo.add_input.value;
   if (inputVal.length > 0) {
     addTodoItem(inputVal);
-    addTodoInput.value = '';
+    this.reset();
   }
 }
 
-addTodoButton.addEventListener('click', handleAddTodo);
+function toggleComplete (e) {
+  e.preventDefault();  
+  if (!e.target.parentNode.matches('.complete-tick')) return;  
+  const todo = e.target.closest('.todo');
+  const index = todo.dataset.index;
+  todos[ index ].completed = !todos[ index ].completed;
+  createTodo(todos, list);
+  localStorage.setItem('todos', JSON.stringify(todos))
+}
+
+function deleteTodo (e) {
+  e.preventDefault();  
+  if (!e.target.parentNode.parentNode.matches('.trash-div')) return;
+  const todo = e.target.closest('.todo');
+  const index = todo.dataset.index;
+  todos = todos.filter((item) => !(item === todos[index]));
+  createTodo(todos, list);
+  localStorage.setItem('todos', JSON.stringify(todos))
+}
+
+function saveEditedTodo () {
+  const editForms = document.querySelectorAll('.edit-form');
+  editForms.forEach(form => {
+    form.edit_btn.addEventListener('click', (e) => {
+      let index = e.target.closest('.todo').dataset.index;
+      todos[index].task = e.target.previousElementSibling.value;
+      todos[index].isEditing = false;
+      createTodo(todos, list);
+      localStorage.setItem('todos', JSON.stringify(todos))
+    })
+  })
+}
+
+function editTodo (e) {
+  e.preventDefault();
+  if (!e.target.parentNode.parentNode.matches('.edit-btn')) return;
+  const todo = e.target.closest('.todo')
+  const index = todo.dataset.index;
+  todos[ index ].isEditing = !todos[ index ].isEditing;
+  createTodo(todos, list);
+  localStorage.setItem('todos', JSON.stringify(todos))
+  saveEditedTodo();
+}
+
+createTodo(todos, list);
+formAddTodo.addEventListener('submit', handleAddTodo);
+list.addEventListener('click', toggleComplete);
+list.addEventListener('click', deleteTodo);
+list.addEventListener('click', editTodo);
