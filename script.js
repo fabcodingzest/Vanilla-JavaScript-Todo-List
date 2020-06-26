@@ -83,22 +83,22 @@ function deleteTodo (e) {
 function saveEditedTodo () {
   const editForms = document.querySelectorAll('.edit-form');
   // When I add click event listener to edit_input button the form works
-  // editForms.forEach(form => {
-  //   form.edit_btn.addEventListener('click', (e) => {
-  //     let index = e.target.closest('.todo').dataset.index;
-  //     todos[index].task = e.target.previousElementSibling.value;
-  //     todos[index].isEditing = false;
-  //     createTodo(todos, list);
-  //     localStorage.setItem('todos', JSON.stringify(todos))
-  //   })
-  // })
+  editForms.forEach(form => {
+    form.edit_btn.addEventListener('click', (e) => {
+      let index = e.target.closest('.todo').dataset.index;
+      todos[index].task = e.target.previousElementSibling.value;
+      todos[index].isEditing = false;
+      createTodo(todos, list);
+      localStorage.setItem('todos', JSON.stringify(todos))
+    })
+  })
   
   // but if I add submit event to form it doesnt fire idky I binded my form (in html template string above) 
-  editForms.forEach(form => form.addEventListener('submit', (e) => {
-    e.preventDefault();
+  // editForms.forEach(form => form.addEventListener('submit', (e) => {
+  //   e.preventDefault();
     
-    console.log('works')
-  }))
+  //   console.log('works')
+  // }))
 
 }
 
